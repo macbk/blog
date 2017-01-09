@@ -1,0 +1,7 @@
+- @posts.each do |post|
+    %h4.title= link_to post.title, post
+    %h5
+        %span.glyphicon.glyphicon-time 
+        Post by John:
+        = post.created_at.strftime("%d %B %Y, %H:%M")
+    %hr
