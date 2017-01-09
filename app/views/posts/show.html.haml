@@ -1,7 +1,8 @@
 %h1= @post.title
 %h5
     %span.glyphicon.glyphicon-time 
-    Posted by John
+    Posted by
+    = @post.user.email
     = time_ago_in_words(@post.created_at)
     ago
 
