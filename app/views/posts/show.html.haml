@@ -6,7 +6,7 @@
     = time_ago_in_words(@post.created_at)
     ago
 
-- if user_signed_in?
+- if user_signed_in? && @post.user.id == current_user.id
     %p
         = link_to "Edit", edit_post_path(@post)
         |
@@ -19,8 +19,11 @@
     %h4= pluralize(@post.comments.count, "Comment")
     = render @post.comments
     %hr
-    %h4 Add comment
-    = render 'comments/form'
+    - if user_signed_in?
+        %h4 Add comment
+        = render 'comments/form'
+    - else
+        %h4 Log in to add comment
 
 %hr
 = link_to "Back", root_path, class: "btn btn-default"

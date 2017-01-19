@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
     before_action :find_post, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_user!, except: [:index, :show]
+    before_action :check_post_author, only: [:edit, :update, :destroy]
+    
     
     def index
         @posts = Post.all.order('created_at DESC')
@@ -49,5 +51,12 @@ class PostsController < ApplicationController
     
     def find_post
         @post = Post.find(params[:id])
+    end
+    
+    def check_post_author
+        if current_user.id != @post.user_id
+            redirect_to @post
+            flash[:danger] = "Access forbidden!"
+        end
     end
 end
