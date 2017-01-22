@@ -13,6 +13,9 @@
         = link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" }
         
 %p= @post.body
+#hashtags
+    - @post.hashtags.each do |hashtag|
+        = hashtag.name
 %hr
 
 #comments
